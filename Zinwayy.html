@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zinway × Koriya Agro — Growth Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700;1,900&family=Barlow+Condensed:wght@200;300;400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ════════════════════════════════════════════════
+   DESIGN TOKENS — ICE FROST + CLOUD PREMIUM
+════════════════════════════════════════════════ */
+:root {
+  /* Ice Frost Palette */
+  --void:        #000507;
+  --abyss:       #010C14;
+  --deep:        #041220;
+  --ocean:       #071B2E;
+  --navy:        #0A2540;
+
+  --frost-900:   #0D3459;
+  --frost-800:   #1A4D7A;
+  --frost-700:   #2869A0;
+  --frost-600:   #3A88C8;
+  --frost-500:   #54A8E8;
+  --frost-400:   #78C4F5;
+  --frost-300:   #A8D8FB;
+  --frost-200:   #C8EAFF;
+  --frost-100:   #E4F5FF;
+  --frost-50:    #F0FAFF;
+
+  /* Cloud White */
+  --cloud-pure:  #FFFFFF;
+  --cloud-bright:#F6FBFF;
+  --cloud-soft:  #EBF6FF;
+  --cloud-mist:  #D8EEFA;
+  --cloud-veil:  rgba(255,255,255,0.06);
+
+  /* Glow Gold Accent */
+  --gold:        #C8A84B;
+  --gold-warm:   #E8C96A;
+  --gold-pale:   #F5E8B8;
+  --gold-glow:   rgba(200,168,75,0.4);
+
+  /* Text */
+  --tx-white:    #FFFFFF;
+  --tx-cloud:    #E4F5FF;
+  --tx-frost:    #A8D8FB;
+  --tx-steel:    #5A90B8;
+  --tx-dark:     #060E18;
+  --tx-body:     #1A3A52;
+  --tx-sub:      #4A7A96;
+
+  /* Shadows / Glows */
+  --glow-frost:  0 0 60px rgba(84,168,232,0.3), 0 0 120px rgba(84,168,232,0.12);
+  --glow-white:  0 0 40px rgba(255,255,255,0.15), 0 0 80px rgba(200,234,255,0.08);
+  --glow-gold:   0 0 30px rgba(200,168,75,0.5), 0 0 60px rgba(200,168,75,0.2);
+  --shadow-deep: 0 24px 80px rgba(0,0,0,0.8), 0 8px 24px rgba(0,0,0,0.6);
+  --shadow-card: 0 8px 40px rgba(0,5,20,0.5), 0 2px 8px rgba(0,5,20,0.3);
+}
+
+/* ════════════════════════════════════════════════
+   BASE
+════════════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--void);
+  color: var(--tx-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.page-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  background: var(--cloud-pure);
+  position: relative;
+  box-shadow: 0 0 120px rgba(84,168,232,0.15), 0 0 400px rgba(0,0,0,0.9);
+}
+
+/* ════════════════════════════════════════════════
+   CLOUD ATMOSPHERE MIXIN (reusable dark sections)
+════════════════════════════════════════════════ */
+.atmos {
+  background:
+    radial-gradient(ellipse 120% 60% at 50% -20%, rgba(84,168,232,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 80% at 80% 110%, rgba(26,77,122,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 50%, rgba(10,37,64,0.8) 0%, transparent 70%),
+    linear-gradient(175deg, #000810 0%, #030F1E 30%, #061828 60%, #091F35 100%);
+}
+
+/* ════════════════════════════════════════════════
+   CLOUD NOISE TEXTURE OVERLAY
+════════════════════════════════════════════════ */
+.cloud-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 200% 80% at 50% 0%, rgba(168,216,251,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 50% at 20% 30%, rgba(255,255,255,0.03) 0%, transparent 40%),
+    radial-gradient(ellipse 150% 60% at 80% 70%, rgba(84,168,232,0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Dot grid */
+.dot-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(120,196,245,0.22) 1px, transparent 1px);
+  background-size: 38px 38px;
+  opacity: 0.28;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 10%, transparent 75%);
+}
+
+/* ════════════════════════════════════════════════
+   ── COVER ──
+════════════════════════════════════════════════ */
+.cover {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 52px 72px 56px;
+  background:
+    radial-gradient(ellipse 140% 70% at 50% -10%, rgba(84,168,232,0.22) 0%, transparent 50%),
+    radial-gradient(ellipse 90% 90% at 90% 80%, rgba(26,77,122,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 5% 60%, rgba(200,168,75,0.05) 0%, transparent 50%),
+    linear-gradient(170deg, #000507 0%, #020C18 25%, #051422 50%, #081C30 75%, #0A2540 100%);
+}
+
+/* Atmospheric cloud layers */
+.cover-cloud-1 {
+  position: absolute;
+  top: -120px; left: -200px;
+  width: 900px; height: 500px;
+  background: radial-gradient(ellipse, rgba(84,168,232,0.12) 0%, rgba(26,77,122,0.06) 40%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(60px);
+  animation: cloudDrift1 18s ease-in-out infinite;
+  pointer-events: none; z-index: 0;
+}
+
+.cover-cloud-2 {
+  position: absolute;
+  bottom: -80px; right: -150px;
+  width: 700px; height: 400px;
+  background: radial-gradient(ellipse, rgba(120,196,245,0.1) 0%, rgba(84,168,232,0.04) 40%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: cloudDrift2 24s ease-in-out infinite;
+  pointer-events: none; z-index: 0;
+}
+
+.cover-cloud-3 {
+  position: absolute;
+  top: 30%; left: 40%;
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.04) 0%, transparent 65%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: cloudDrift3 14s ease-in-out infinite;
+  pointer-events: none; z-index: 0;
+}
+
+@keyframes cloudDrift1 {
+  0%,100% { transform: translate(0,0) scale(1); opacity:1; }
+  33%      { transform: translate(40px,-20px) scale(1.04); opacity:.85; }
+  66%      { transform: translate(-20px,30px) scale(.97); opacity:.9; }
+}
+@keyframes cloudDrift2 {
+  0%,100% { transform: translate(0,0) scale(1); }
+  50%      { transform: translate(-30px,-25px) scale(1.06); }
+}
+@keyframes cloudDrift3 {
+  0%,100% { transform: translate(0,0); opacity:.6; }
+  50%      { transform: translate(20px,-15px); opacity:1; }
+}
+
+/* Ice crystal light streaks */
+.cover-streaks {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(118deg, transparent 0%, transparent 44%, rgba(168,216,251,0.04) 46%, rgba(255,255,255,0.06) 47%, rgba(168,216,251,0.04) 48%, transparent 50%, transparent 100%),
+    linear-gradient(142deg, transparent 0%, transparent 60%, rgba(120,196,245,0.03) 62%, rgba(168,216,251,0.04) 63%, transparent 65%, transparent 100%);
+  pointer-events: none; z-index: 0;
+}
+
+/* Fine dot grid on cover */
+.cover-dots {
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(120,196,245,0.25) 1px, transparent 1px);
+  background-size: 36px 36px;
+  opacity: 0.22;
+  pointer-events: none; z-index: 0;
+  mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 0%, transparent 100%);
+}
+
+/* Horizontal frost lines */
+.cover-lines {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg,
+      transparent 0%, transparent 19.8%,
+      rgba(84,168,232,0.06) 20%, transparent 20.2%,
+      transparent 39.8%,
+      rgba(84,168,232,0.04) 40%, transparent 40.2%,
+      transparent 59.8%,
+      rgba(84,168,232,0.06) 60%, transparent 60.2%,
+      transparent 79.8%,
+      rgba(84,168,232,0.04) 80%, transparent 80.2%,
+      transparent 100%);
+  pointer-events: none; z-index: 0;
+}
+
+.cover-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative; z-index: 3;
+}
+
+/* Logo */
+.logo-mark {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logo-primary {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.5em;
+  color: var(--cloud-pure);
+  text-transform: uppercase;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(120,196,245,0.6), 0 0 60px rgba(84,168,232,0.3), var(--shadow-deep);
+}
+
+.logo-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: rgba(168,216,251,0.55);
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.doc-meta { text-align: right; }
+
+.doc-ref {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.38em;
+  color: var(--frost-500);
+  text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+  text-shadow: 0 0 20px rgba(84,168,232,0.5);
+}
+
+.doc-date {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  color: rgba(168,216,251,0.5);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+}
+
+/* Cover center */
+.cover-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative; z-index: 3;
+  padding: 60px 0 40px;
+}
+
+.cover-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(90deg, rgba(200,168,75,0.15), rgba(200,168,75,0.05));
+  border: 1px solid rgba(200,168,75,0.3);
+  border-radius: 2px;
+  padding: 8px 20px 8px 14px;
+  margin-bottom: 44px;
+  width: fit-content;
+}
+
+.badge-pulse {
+  width: 6px; height: 6px;
+  background: var(--gold-warm);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(200,168,75,0.9), 0 0 20px rgba(200,168,75,0.4);
+  animation: badgePulse 2.4s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%,100% { box-shadow: 0 0 8px rgba(200,168,75,0.8), 0 0 16px rgba(200,168,75,0.3); transform:scale(1); }
+  50%      { box-shadow: 0 0 16px rgba(200,168,75,1), 0 0 32px rgba(200,168,75,0.5); transform:scale(1.2); }
+}
+
+.badge-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.42em;
+  color: var(--gold-warm);
+  text-transform: uppercase;
+  font-weight: 600;
+  text-shadow: 0 0 16px rgba(200,168,75,0.5);
+}
+
+/* HEADLINE — Bebas + Barlow Condensed + Caveat mix */
+.cover-headline {
+  line-height: 0.95;
+  margin-bottom: 20px;
+}
+
+.hl-line-1 {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 118px;
+  letter-spacing: 0.04em;
+  color: var(--cloud-pure);
+  text-shadow: 0 0 80px rgba(120,196,245,0.3), 0 0 200px rgba(84,168,232,0.12), 0 8px 32px rgba(0,0,0,0.9), var(--shadow-deep);
+  line-height: 0.92;
+}
+
+.hl-line-2 {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 80px;
+  font-weight: 200;
+  letter-spacing: 0.22em;
+  color: rgba(168,216,251,0.75);
+  text-transform: uppercase;
+  line-height: 1.1;
+  text-shadow: 0 0 40px rgba(84,168,232,0.4), 0 4px 20px rgba(0,0,0,0.8);
+}
+
+.hl-line-3 {
+  display: block;
+  font-family: 'Caveat', cursive;
+  font-size: 72px;
+  font-weight: 600;
+  color: var(--gold-warm);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-shadow: 0 0 40px rgba(200,168,75,0.6), 0 0 80px rgba(200,168,75,0.25), 0 4px 16px rgba(0,0,0,0.9);
+  position: relative;
+}
+
+.hl-line-3::after {
+  content: '';
+  position: absolute;
+  bottom: 2px; left: 0;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), rgba(200,168,75,0.1));
+  border-radius: 2px;
+  box-shadow: 0 0 12px rgba(200,168,75,0.6);
+}
+
+.cover-for {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  color: rgba(120,196,245,0.6);
+  text-transform: uppercase;
+  font-weight: 300;
+  margin-bottom: 40px;
+  margin-top: 4px;
+}
+
+/* Divider */
+.frost-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.fd-line {
+  height: 1px;
+  width: 48px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  box-shadow: 0 0 8px rgba(200,168,75,0.4);
+}
+
+.fd-diamond {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(200,168,75,0.7);
+}
+
+.cover-statement {
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 2;
+  color: rgba(200,234,255,0.72);
+  font-weight: 300;
+}
+
+.cover-statement strong {
+  color: var(--cloud-pure);
+  font-weight: 600;
+  text-shadow: 0 0 20px rgba(255,255,255,0.3);
+}
+
+/* Cover bottom */
+.cover-bottom {
+  position: relative; z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 36px;
+  border-top: 1px solid rgba(84,168,232,0.12);
+}
+
+.party-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.45em;
+  color: var(--frost-600);
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+  text-shadow: 0 0 14px rgba(84,168,232,0.5);
+}
+
+.party-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--cloud-pure);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.8), 0 0 30px rgba(255,255,255,0.1);
+  margin-bottom: 4px;
+}
+
+.party-detail {
+  font-size: 11px;
+  color: rgba(120,196,245,0.55);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.cover-arrow {
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0.4; align-self: center;
+}
+.arrow-line { width: 28px; height: 1px; background: var(--frost-700); }
+.arrow-tip {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px; color: var(--frost-500);
+}
+
+/* ════════════════════════════════════════════════
+   SECTION DIVIDER
+════════════════════════════════════════════════ */
+.sec-div {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(84,168,232,0.25) 30%, rgba(84,168,232,0.25) 70%, transparent 100%);
+}
+
+/* ════════════════════════════════════════════════
+   ── OPENING STATEMENT ──
+════════════════════════════════════════════════ */
+.opening {
+  background:
+    radial-gradient(ellipse 80% 100% at 100% 50%, rgba(84,168,232,0.07) 0%, transparent 60%),
+    linear-gradient(148deg, #F4FBFF 0%, #EBF5FD 50%, #F2F9FF 100%);
+  padding: 84px 72px;
+  position: relative;
+  overflow: hidden;
+}
+
+.opening-bg-mark {
+  position: absolute;
+  top: -40px; left: 40px;
+  font-family: 'Playfair Display', serif;
+  font-size: 400px;
+  color: rgba(84,168,232,0.045);
+  line-height: 1;
+  font-weight: 900;
+  font-style: italic;
+  pointer-events: none;
+  user-select: none;
+}
+
+.opening-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.48;
+  color: var(--tx-dark);
+  max-width: 640px;
+  margin-bottom: 36px;
+  position: relative; z-index: 2;
+}
+
+.q-bar {
+  display: inline-block;
+  width: 4px; height: 0.85em;
+  background: linear-gradient(180deg, var(--gold), var(--gold-warm));
+  border-radius: 2px;
+  vertical-align: middle;
+  margin-right: 18px;
+  box-shadow: 0 0 14px rgba(200,168,75,0.5);
+}
+
+.opening-body {
+  font-size: 16.5px;
+  line-height: 2;
+  color: var(--tx-body);
+  max-width: 620px;
+  font-weight: 300;
+  position: relative; z-index: 2;
+}
+
+.opening-body strong {
+  color: var(--tx-dark);
+  font-weight: 600;
+}
+
+/* ════════════════════════════════════════════════
+   SECTION SHELL
+════════════════════════════════════════════════ */
+.section {
+  padding: 84px 72px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section.light {
+  background: var(--cloud-pure);
+}
+
+.section.tint {
+  background: linear-gradient(148deg, #F4FBFF 0%, #EBF5FD 55%, #F2F9FF 100%);
+}
+
+.section.dark {
+  background:
+    radial-gradient(ellipse 100% 60% at 50% -10%, rgba(84,168,232,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 80% at 90% 100%, rgba(26,77,122,0.3) 0%, transparent 60%),
+    linear-gradient(165deg, #000810 0%, #030F1C 30%, #061727 60%, #091E33 100%);
+}
+
+.section.dark::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(120,196,245,0.2) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.22;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 20%, transparent 80%);
+}
+
+.section.dark::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 140% 50% at 50% 0%, rgba(84,168,232,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 100% 40% at 50% 100%, rgba(26,77,122,0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.sec-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.48em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.sec-eyebrow.light { color: var(--frost-700); }
+.sec-eyebrow.dark  { color: var(--frost-500); text-shadow: 0 0 16px rgba(84,168,232,0.5); }
+
+.sec-title {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  margin-bottom: 18px;
+}
+.sec-title.light {
+  font-size: 66px;
+  color: var(--tx-dark);
+}
+.sec-title.dark {
+  font-size: 66px;
+  color: var(--cloud-pure);
+  text-shadow: 0 0 60px rgba(120,196,245,0.2), var(--shadow-deep);
+  position: relative; z-index: 2;
+}
+
+.sec-intro {
+  font-size: 16px;
+  line-height: 1.9;
+  font-weight: 300;
+  max-width: 560px;
+  margin-bottom: 60px;
+}
+.sec-intro.light { color: var(--tx-body); }
+.sec-intro.dark  { color: rgba(200,234,255,0.7); position: relative; z-index: 2; }
+
+/* ════════════════════════════════════════════════
+   ── SERVICE BLOCKS ──
+════════════════════════════════════════════════ */
+.service-block {
+  margin-bottom: 72px;
+  padding-bottom: 72px;
+  border-bottom: 1px solid rgba(84,168,232,0.1);
+}
+.service-block:last-child {
+  border-bottom: none; margin-bottom: 0; padding-bottom: 0;
+}
+
+.svc-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.svc-idx {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--frost-700);
+  font-weight: 700;
+}
+
+.svc-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 52px;
+  letter-spacing: 0.03em;
+  color: var(--tx-dark);
+  line-height: 1;
+}
+
+.svc-tag {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--tx-body);
+  max-width: 520px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+/* Tier Grid */
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+}
+
+.tier {
+  border-radius: 10px;
+  padding: 28px 22px;
+  border: 1px solid rgba(84,168,232,0.15);
+  background: #FAFCFF;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tier::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(84,168,232,0.2), transparent);
+}
+
+.tier:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(84,168,232,0.12);
+}
+
+.tier.rec {
+  border-color: rgba(58,136,200,0.5);
+  background: linear-gradient(150deg, #EDF6FE 0%, #E0F0FB 100%);
+  box-shadow: 0 8px 40px rgba(84,168,232,0.18), 0 2px 8px rgba(84,168,232,0.1);
+}
+
+.tier.rec::before {
+  background: linear-gradient(90deg, var(--frost-700), var(--frost-500), var(--frost-400), var(--frost-700));
+  height: 2px;
+  box-shadow: 0 0 14px rgba(84,168,232,0.5);
+}
+
+.rec-tag {
+  position: absolute;
+  top: 0; right: 18px;
+  background: linear-gradient(135deg, var(--frost-700), var(--frost-500));
+  color: var(--cloud-pure);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  padding: 5px 12px;
+  border-radius: 0 0 8px 8px;
+  text-transform: uppercase;
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(84,168,232,0.4);
+}
+
+.tier-lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.38em;
+  color: var(--frost-800);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.tier-orig {
+  font-size: 10.5px;
+  color: var(--tx-sub);
+  text-decoration: line-through;
+  margin-bottom: 2px;
+  font-weight: 400;
+}
+
+.tier-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 56px;
+  color: var(--tx-dark);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+.tier-price .cur { font-size: 24px; vertical-align: super; }
+
+.tier-unit {
+  font-size: 11px;
+  color: var(--tx-body);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-bottom: 18px;
+}
+
+.tier-hr { height: 1px; background: rgba(84,168,232,0.15); margin-bottom: 14px; }
+
+.tier-list { list-style: none; }
+.tier-list li {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--tx-body);
+  padding: 3px 0 3px 18px;
+  position: relative;
+  font-weight: 300;
+}
+.tier-list li::before {
+  content: '—';
+  position: absolute; left: 0;
+  color: var(--frost-700);
+  font-size: 9px;
+  top: 6px;
+  font-weight: 700;
+}
+.tier-list li.hl { color: var(--tx-dark); font-weight: 600; }
+
+/* ════════════════════════════════════════════════
+   ── BEFORE vs AFTER ──
+════════════════════════════════════════════════ */
+.bva-wrap {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-deep), 0 0 60px rgba(84,168,232,0.12);
+  margin-bottom: 60px;
+}
+
+.bva-col {
+  padding: 44px 36px;
+  position: relative;
+}
+
+.bva-before {
+  background: linear-gradient(148deg, #F2F2F4 0%, #E8E8EE 100%);
+  border-right: 1px solid rgba(84,168,232,0.2);
+}
+
+.bva-after {
+  background: linear-gradient(148deg, #061828 0%, #091E35 100%);
+  position: relative; overflow: hidden;
+}
+
+.bva-after::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(84,168,232,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 100% 100%, rgba(26,77,122,0.25) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.bva-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.bva-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.bva-before .bva-dot { background: #AAAABC; }
+.bva-after  .bva-dot { background: var(--frost-500); box-shadow: 0 0 12px rgba(84,168,232,0.8); }
+
+.bva-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.48em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.bva-before .bva-label { color: #888899; }
+.bva-after  .bva-label { color: var(--frost-400); text-shadow: 0 0 12px rgba(84,168,232,0.5); }
+
+.bva-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 22px;
+  align-items: flex-start;
+}
+
+.bva-icon {
+  font-size: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bva-text { }
+
+.bva-stat {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.bva-before .bva-stat { color: #888899; }
+.bva-after  .bva-stat { color: var(--cloud-pure); text-shadow: 0 0 20px rgba(255,255,255,0.2); position: relative; z-index: 2; }
+
+.bva-desc {
+  font-size: 12.5px;
+  line-height: 1.65;
+  font-weight: 300;
+}
+.bva-before .bva-desc { color: #777788; }
+.bva-after  .bva-desc { color: rgba(168,216,251,0.7); position: relative; z-index: 2; }
+
+/* VS badge */
+.bva-vs {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px; height: 46px;
+  background: linear-gradient(135deg, var(--frost-700), var(--frost-500));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  color: var(--cloud-pure);
+  box-shadow: 0 0 30px rgba(84,168,232,0.5), 0 0 60px rgba(84,168,232,0.2), 0 8px 20px rgba(0,0,0,0.6);
+  z-index: 10;
+}
+
+/* ════════════════════════════════════════════════
+   ── WEEK TIMELINE ──
+════════════════════════════════════════════════ */
+.timeline-wrap {
+  position: relative; z-index: 2;
+  margin-top: 8px;
+}
+
+.timeline-track {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Vertical spine */
+.timeline-track::before {
+  content: '';
+  position: absolute;
+  left: 28px; top: 28px; bottom: 28px;
+  width: 1px;
+  background: linear-gradient(180deg,
+    rgba(84,168,232,0.6) 0%,
+    rgba(84,168,232,0.3) 50%,
+    rgba(84,168,232,0.1) 100%);
+  box-shadow: 0 0 8px rgba(84,168,232,0.3);
+}
+
+.tl-item {
+  display: flex;
+  gap: 28px;
+  padding: 24px 0;
+  position: relative;
+}
+
+.tl-item:not(:last-child) { border-bottom: 1px solid rgba(84,168,232,0.08); }
+
+.tl-node {
+  flex-shrink: 0;
+  width: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tl-circle {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--frost-700), var(--frost-500));
+  box-shadow: 0 0 16px rgba(84,168,232,0.6), 0 0 32px rgba(84,168,232,0.2);
+  border: 2px solid rgba(84,168,232,0.3);
+  position: relative; z-index: 2;
+  flex-shrink: 0;
+}
+
+.tl-week {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 7.5px;
+  letter-spacing: 0.3em;
+  color: var(--frost-500);
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(84,168,232,0.4);
+  white-space: nowrap;
+}
+
+.tl-content {
+  flex: 1;
+  padding-top: 0;
+}
+
+.tl-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.05em;
+  color: var(--cloud-pure);
+  line-height: 1;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+
+.tl-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tl-chip {
+  background: rgba(84,168,232,0.1);
+  border: 1px solid rgba(84,168,232,0.22);
+  border-radius: 3px;
+  padding: 5px 12px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--frost-300);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.tl-chip.gold {
+  background: rgba(200,168,75,0.1);
+  border-color: rgba(200,168,75,0.28);
+  color: var(--gold-pale);
+  text-shadow: 0 0 10px rgba(200,168,75,0.3);
+}
+
+/* ════════════════════════════════════════════════
+   ── PACKAGE TABLE ──
+════════════════════════════════════════════════ */
+.pkg-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 48px 0 52px;
+  position: relative; z-index: 2;
+}
+
+.pkg-table thead tr {
+  border-bottom: 1px solid rgba(120,196,245,0.2);
+}
+
+.pkg-table th {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.45em;
+  color: var(--frost-300);
+  text-transform: uppercase;
+  padding: 0 0 16px;
+  text-align: left;
+  font-weight: 700;
+  text-shadow: 0 0 12px rgba(84,168,232,0.4);
+}
+
+.pkg-table td {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(120,196,245,0.08);
+  vertical-align: middle;
+}
+
+.pkg-table tr:last-child td { border-bottom: none; }
+
+.pkg-svc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  color: var(--cloud-pure);
+  font-weight: 500;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.pkg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(84,168,232,0.1);
+  border: 1px solid rgba(84,168,232,0.25);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--frost-200);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.pkg-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--frost-300);
+  text-align: right;
+  white-space: nowrap;
+}
+.pkg-price .unit {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px;
+  color: var(--frost-600);
+  font-weight: 500;
+}
+
+.pkg-total-row td {
+  background: rgba(84,168,232,0.07);
+  border-top: 1px solid rgba(120,196,245,0.25) !important;
+  border-bottom: none !important;
+  padding: 26px 22px !important;
+}
+.pkg-total-lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.36em;
+  color: var(--frost-200);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.pkg-total-note {
+  font-size: 12px;
+  color: rgba(120,196,245,0.5);
+  margin-top: 3px;
+  font-weight: 300;
+}
+.pkg-total-price {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 68px;
+  letter-spacing: 0.03em;
+  color: var(--cloud-pure);
+  text-align: right;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(120,196,245,0.25), var(--shadow-deep);
+}
+.pkg-total-price .cur { font-size: 26px; vertical-align: super; }
+.pkg-total-price .mo {
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  color: var(--frost-500);
+  font-weight: 500;
+}
+
+/* Savings */
+.savings {
+  position: relative; z-index: 2;
+  background: linear-gradient(90deg, rgba(200,168,75,0.14), rgba(200,168,75,0.04) 75%, transparent);
+  border: 1px solid rgba(200,168,75,0.28);
+  border-radius: 8px;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+  box-shadow: inset 0 1px 0 rgba(200,168,75,0.12), 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.savings-lbl {
+  font-size: 13px;
+  color: var(--gold-pale);
+  font-weight: 300;
+  text-shadow: 0 0 10px rgba(200,168,75,0.3);
+}
+
+.savings-amt {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  letter-spacing: 0.04em;
+  color: var(--gold-warm);
+  text-shadow: var(--glow-gold);
+}
+
+.pkg-note {
+  position: relative; z-index: 2;
+  font-size: 15px;
+  color: rgba(200,234,255,0.65);
+  font-weight: 300;
+  line-height: 2;
+}
+
+/* ════════════════════════════════════════════════
+   ── ROI GRID ──
+════════════════════════════════════════════════ */
+.roi-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 44px;
+}
+
+.roi-card {
+  border-radius: 10px;
+  padding: 32px 28px;
+  background: linear-gradient(148deg, #EBF5FC 0%, #DFF0FA 100%);
+  border: 1px solid rgba(84,168,232,0.2);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.roi-card:hover { transform: translateY(-2px); }
+
+.roi-card::after {
+  content: '';
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(84,168,232,0.2), transparent);
+}
+
+.roi-scenario {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: var(--frost-700);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.roi-value {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 60px;
+  letter-spacing: 0.03em;
+  color: var(--tx-dark);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.roi-label {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--tx-body);
+  font-weight: 300;
+}
+
+/* ════════════════════════════════════════════════
+   ── TERMS GRID ──
+════════════════════════════════════════════════ */
+.terms-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 44px;
+}
+
+.term-card {
+  border-radius: 8px;
+  padding: 26px 22px;
+  border: 1px solid rgba(84,168,232,0.14);
+  background: #FAFCFF;
+  position: relative;
+  overflow: hidden;
+}
+
+.term-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--frost-700), rgba(84,168,232,0.15));
+  border-radius: 3px 0 0 3px;
+}
+
+.term-lbl {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: var(--frost-700);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 9px;
+}
+
+.term-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--tx-body);
+  font-weight: 300;
+}
+.term-text strong { color: var(--tx-dark); font-weight: 600; }
+
+/* ════════════════════════════════════════════════
+   ── CTA SECTION ──
+════════════════════════════════════════════════ */
+.cta-section {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 40%, rgba(84,168,232,0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 80% 90%, rgba(26,77,122,0.3) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 10% 10%, rgba(200,168,75,0.06) 0%, transparent 50%),
+    linear-gradient(170deg, #000507 0%, #020C18 35%, #061826 65%, #091E35 100%);
+  padding: 100px 72px 84px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle, rgba(120,196,245,0.18) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.2;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Atmospheric rings */
+.cta-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px solid rgba(84,168,232,0.07);
+  pointer-events: none;
+}
+.cta-ring-1 { width: 700px; height: 700px; }
+.cta-ring-2 { width: 500px; height: 500px; border-color: rgba(84,168,232,0.05); }
+.cta-ring-3 { width: 300px; height: 300px; border-color: rgba(84,168,232,0.09); }
+
+/* Cloud glow behind CTA */
+.cta-glow {
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(84,168,232,0.14) 0%, transparent 65%);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.cta-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--gold-warm);
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 28px;
+  position: relative; z-index: 2;
+  text-shadow: 0 0 20px rgba(200,168,75,0.5);
+}
+
+.cta-headline {
+  line-height: 0.95;
+  margin-bottom: 20px;
+  position: relative; z-index: 2;
+}
+
+.cta-hl-1 {
+  display: block;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 90px;
+  letter-spacing: 0.04em;
+  color: var(--cloud-pure);
+  text-shadow: 0 0 80px rgba(120,196,245,0.25), var(--shadow-deep);
+}
+
+.cta-hl-2 {
+  display: block;
+  font-family: 'Caveat', cursive;
+  font-size: 70px;
+  font-weight: 600;
+  color: var(--gold-warm);
+  letter-spacing: 0.01em;
+  text-shadow: var(--glow-gold), 0 4px 20px rgba(0,0,0,0.8);
+}
+
+.cta-sub {
+  font-size: 15.5px;
+  color: rgba(168,216,251,0.65);
+  font-weight: 300;
+  margin-bottom: 56px;
+  position: relative; z-index: 2;
+  letter-spacing: 0.03em;
+}
+
+/* CTA BUTTONS — pure <a> links for PDF clickability */
+.cta-btns {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative; z-index: 2;
+  margin-bottom: 52px;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border-radius: 6px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  line-height: 1;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-wa {
+  background: linear-gradient(135deg, #25D366 0%, #1CB954 100%);
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(37,211,102,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.btn-email {
+  background: rgba(255,255,255,0.06);
+  color: var(--cloud-pure);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.btn-phone {
+  background: linear-gradient(135deg, var(--frost-700) 0%, var(--frost-500) 100%);
+  color: var(--cloud-pure);
+  box-shadow: 0 4px 24px rgba(84,168,232,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+.btn-icon { font-size: 16px; }
+
+.cta-valid {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--frost-500);
+  text-transform: uppercase;
+  font-weight: 700;
+  position: relative; z-index: 2;
+  text-shadow: 0 0 12px rgba(84,168,232,0.4);
+}
+
+.cta-valid .hl {
+  color: var(--gold-warm);
+  text-shadow: 0 0 14px rgba(200,168,75,0.5);
+}
+
+/* ════════════════════════════════════════════════
+   ── FOOTER ──
+════════════════════════════════════════════════ */
+.footer {
+  background: #010810;
+  padding: 28px 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(84,168,232,0.1);
+}
+
+.footer-brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: rgba(84,168,232,0.45);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.footer-meta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(84,168,232,0.3);
+  text-align: right;
+  line-height: 2;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ════════════════════════════════════════════════
+   ── PDF FAB ──
+════════════════════════════════════════════════ */
+.pdf-fab {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 9999;
+  display: flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, #040E1C, #0A2540);
+  color: var(--cloud-pure);
+  border: 1px solid rgba(84,168,232,0.35);
+  border-radius: 50px;
+  padding: 12px 22px 12px 14px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 24px rgba(84,168,232,0.15);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.pdf-fab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.8), 0 0 32px rgba(84,168,232,0.25);
+}
+
+.fab-icon {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, var(--frost-300), var(--frost-500));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--tx-dark);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  flex-shrink: 0;
+}
+
+.fab-text { line-height: 1; }
+.fab-text span {
+  display: block;
+  font-size: 8px; letter-spacing: 0.18em;
+  color: var(--frost-200); margin-top: 2px;
+  text-transform: uppercase; font-weight: 400;
+}
+
+.toast {
+  position: fixed;
+  bottom: 96px; right: 28px;
+  background: #071525;
+  border: 1px solid var(--frost-700);
+  color: var(--cloud-pure);
+  padding: 16px 22px;
+  border-radius: 8px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 320px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  z-index: 10000;
+  opacity: 0; pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .3s ease, transform .3s ease;
+}
+.toast.show { opacity:1; transform:translateY(0); }
+
+/* ════════════════════════════════════════════════
+   ── PRINT / PDF ──
+════════════════════════════════════════════════ */
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html, body {
+    margin: 0 !important; padding: 0 !important;
+    width: 210mm !important;
+    background: #000810 !important;
+  }
+
+  .pdf-fab, .toast { display: none !important; }
+
+  .page-wrap {
+    max-width: 100% !important;
+    width: 210mm !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Page breaks */
+  .cover {
+    min-height: 297mm !important;
+    height: 297mm !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    padding: 44px 60px 44px !important;
+  }
+
+  .opening {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  .section.light, .section.tint {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .service-block {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  .section.dark {
+    page-break-before: always !important;
+    break-before: page !important;
+  }
+
+  /* CTA full page */
+  .cta-section {
+    page-break-before: always !important;
+    break-before: page !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Scale type for print */
+  .hl-line-1    { font-size: 88px !important; }
+  .hl-line-2    { font-size: 62px !important; }
+  .hl-line-3    { font-size: 56px !important; }
+  .sec-title    { font-size: 54px !important; }
+  .svc-name     { font-size: 42px !important; }
+  .tier-price   { font-size: 46px !important; }
+  .pkg-total-price { font-size: 56px !important; }
+  .cta-hl-1     { font-size: 74px !important; }
+  .cta-hl-2     { font-size: 58px !important; }
+  .roi-value    { font-size: 50px !important; }
+  .opening-quote { font-size: 30px !important; }
+  .bva-stat     { font-size: 26px !important; }
+  .tl-title     { font-size: 22px !important; }
+
+  .sec-div { display: none !important; }
+
+  /* Keep CTA buttons clickable in PDF */
+  .cta-btn {
+    transition: none !important;
+    transform: none !important;
+    display: inline-flex !important;
+    text-decoration: none !important;
+  }
+  .btn-wa    { background: #25D366 !important; color:#fff !important; }
+  .btn-phone { background: #2869A0 !important; color:#fff !important; }
+}
+
+@page { size: A4 portrait; margin: 0; }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+<!-- ══════════════════════════════════════
+     COVER
+══════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-cloud-1"></div>
+  <div class="cover-cloud-2"></div>
+  <div class="cover-cloud-3"></div>
+  <div class="cover-streaks"></div>
+  <div class="cover-dots"></div>
+  <div class="cover-lines"></div>
+
+  <div class="cover-top">
+    <div class="logo-mark">
+      <div class="logo-primary">Zinway</div>
+      <div class="logo-sub">AI-Powered Digital Agency</div>
+    </div>
+    <div class="doc-meta">
+      <span class="doc-ref">Ref · #ZW-KAL-2025-02</span>
+      <span class="doc-date">26 April 2025 &nbsp;·&nbsp; Valid Until 20 May 2025</span>
+    </div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-badge">
+      <div class="badge-pulse"></div>
+      <span class="badge-text">A Personalised Growth Partnership Proposal</span>
+    </div>
+
+    <div class="cover-headline">
+      <span class="hl-line-1">YOUR BRAND.</span>
+      <span class="hl-line-2">our systems.</span>
+      <span class="hl-line-3">Real Results.</span>
+    </div>
+
+    <div class="cover-for">For Koriya Agro Producers Ltd — Karma Brand</div>
+
+    <div class="frost-divider">
+      <div class="fd-line"></div>
+      <div class="fd-diamond"></div>
+    </div>
+
+    <div class="cover-statement">
+      Karma ka honey, oils, aur soaps — <strong>yeh duniya ke behtareen natural products mein se hain.</strong>
+      Jo cheez abhi missing hai woh sirf ek well-built digital presence hai.
+      Is proposal mein hum aapke saath har woh step cover karte hain
+      jo aapke brand ko shelf se screen tak le jaata hai —
+      <strong>measurable growth ke saath, not just promises.</strong>
+    </div>
+  </div>
+
+  <div class="cover-bottom">
+    <div>
+      <div class="party-label">Prepared By</div>
+      <div class="party-name">Zinway</div>
+      <div class="party-detail">zinwayyy@gmail.com &nbsp;·&nbsp; +91 96309 14500</div>
+    </div>
+    <div class="cover-arrow">
+      <div class="arrow-line"></div>
+      <div class="arrow-tip">→</div>
+      <div class="arrow-line"></div>
+    </div>
+    <div style="text-align:right">
+      <div class="party-label">Prepared For</div>
+      <div class="party-name">Koriya Agro Producers Ltd</div>
+      <div class="party-detail">Tilwandand, Chhattisgarh · koriyaagroltd.com</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     OPENING
+══════════════════════════════════════ -->
+<div class="opening">
+  <div class="opening-bg-mark">"</div>
+  <div class="opening-quote">
+    <span class="q-bar"></span>
+    "Aapke products mein pehle se hi woh quality hai jo customers dhundhte hain. Hum sirf ensure karte hain ki woh customers aapko dhundh sakein."
+  </div>
+  <div class="opening-body">
+    Koriya Agro ka Karma brand — pure jungle honey, cold-pressed oils, handmade soaps — these are not commodity products. They carry a story, a geography, a trust that most brands manufacture artificially. <strong>You have the real thing.</strong>
+    <br><br>
+    What follows is not a generic digital marketing pitch. These are five specific, measurable services — each one directly tied to a revenue outcome for your business. Every rupee spent points back to a clear business result.
+    <br><br>
+    <strong>Hum aapke vendor nahi hain. Hum aapke growth partner banne ke liye yahan hain.</strong>
+  </div>
+</div>
+
+<div class="sec-div"></div>
+
+<!-- ══════════════════════════════════════
+     BEFORE vs AFTER
+══════════════════════════════════════ -->
+<div class="section tint">
+  <div class="sec-eyebrow light">00 · The Honest Picture</div>
+  <div class="sec-title light">Karma Brand:<br>Before &amp; After Zinway</div>
+  <div class="sec-intro light">This is not a comfortable comparison — it's an honest one. Because understanding the gap is the first step to closing it.</div>
+
+  <div class="bva-wrap">
+    <!-- Before -->
+    <div class="bva-col bva-before">
+      <div class="bva-header">
+        <div class="bva-dot"></div>
+        <span class="bva-label">Without Zinway — Today</span>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">📦</span>
+        <div class="bva-text">
+          <div class="bva-stat">Phone Photos</div>
+          <div class="bva-desc">Products shot on phone, inconsistent backgrounds — looks handmade, not premium. Customers scroll past.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">🔇</span>
+        <div class="bva-text">
+          <div class="bva-stat">Silent Evenings</div>
+          <div class="bva-desc">Customer DMs at 9 PM, no reply till morning. That lead ordered from a competitor who replied at 9:02 PM.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">📉</span>
+        <div class="bva-text">
+          <div class="bva-stat">0 Reels / Week</div>
+          <div class="bva-desc">Instagram algorithm punishes inactivity. Without Reels, no discovery. Without discovery, no new customers.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">✉️</span>
+        <div class="bva-text">
+          <div class="bva-stat">No B2B Pipeline</div>
+          <div class="bva-desc">Retailers and health stores don't find you on Instagram. Wholesale grows only through word of mouth — slow and unpredictable.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">🏷️</span>
+        <div class="bva-text">
+          <div class="bva-stat">Price Haggling</div>
+          <div class="bva-desc">Without premium visual identity, customers compare you to cheap alternatives and negotiate down your margins.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VS badge -->
+    <div class="bva-vs">VS</div>
+
+    <!-- After -->
+    <div class="bva-col bva-after">
+      <div class="bva-header">
+        <div class="bva-dot"></div>
+        <span class="bva-label">With Zinway — 90 Days Later</span>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">✨</span>
+        <div class="bva-text">
+          <div class="bva-stat">Cinematic Visuals</div>
+          <div class="bva-desc">AI-generated lifestyle photography and video. Customers stop scrolling. Karma looks like a ₹2,000 urban D2C brand — because it deserves to.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">🤖</span>
+        <div class="bva-text">
+          <div class="bva-stat">24/7 AI Bot Active</div>
+          <div class="bva-desc">Every inquiry answered instantly. Orders captured at 11 PM. Customer feels heard. Your team does nothing — the bot handles it.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">🔥</span>
+        <div class="bva-text">
+          <div class="bva-stat">3 Reels / Week</div>
+          <div class="bva-desc">Consistent cinematic content. Algorithm feeds Karma to new audiences daily. 3–5K new followers in 90 days, compounding every month.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">📈</span>
+        <div class="bva-text">
+          <div class="bva-stat">8–15 Leads/Month</div>
+          <div class="bva-desc">Qualified wholesale inquiries from targeted email outreach to retailers, health chains, organic stores across India.</div>
+        </div>
+      </div>
+
+      <div class="bva-item">
+        <span class="bva-icon">💎</span>
+        <div class="bva-text">
+          <div class="bva-stat">Premium Positioning</div>
+          <div class="bva-desc">Professional identity signals quality before anyone reads the price. Customers pay asking price — sometimes more — because they see the value.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-div"></div>
+
+<!-- ══════════════════════════════════════
+     SERVICES
+══════════════════════════════════════ -->
+<div class="section light">
+  <div class="sec-eyebrow light">01 · Services &amp; Pricing</div>
+  <div class="sec-title light">What We<br>Build Together</div>
+  <div class="sec-intro light">Five focused services. Each one engineered to close a specific gap between where Karma is today and where it can be in three months.</div>
+
+  <!-- S·01 WhatsApp -->
+  <div class="service-block">
+    <div class="svc-header">
+      <span class="svc-idx">S·01</span>
+      <span class="svc-name">WhatsApp AI Bot</span>
+    </div>
+    <div class="svc-tag">Right now, a customer searching for natural honey at 11 PM gets no response from you — but your competitor's bot replies in seconds. That sale is gone. A WhatsApp AI Bot means every inquiry gets answered, every order gets captured, 24/7 — without adding a single staff member.</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-lbl">Basic Bot</div>
+        <div class="tier-orig">Market rate ₹8,000+</div>
+        <div class="tier-price"><span class="cur">₹</span>4,999</div>
+        <div class="tier-unit">/ one-time setup · + ₹999/mo maintenance</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>Auto-replies to 50+ common questions</li>
+          <li>Product catalog sharing via WhatsApp</li>
+          <li>Basic FAQ flow — Hindi &amp; English</li>
+        </ul>
+      </div>
+      <div class="tier rec">
+        <div class="rec-tag">Recommended</div>
+        <div class="tier-lbl">Smart Bot</div>
+        <div class="tier-orig">Market rate ₹18,000+</div>
+        <div class="tier-price"><span class="cur">₹</span>9,999</div>
+        <div class="tier-unit">/ one-time setup · + ₹1,499/mo maintenance</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>Everything in Basic</li>
+          <li class="hl">Live order collection &amp; follow-up automation</li>
+          <li>Customer segmentation by city &amp; product</li>
+          <li>Catalog browsing inside WhatsApp</li>
+          <li>Lead capture — naam, number, city</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-lbl">Full AI Agent</div>
+        <div class="tier-orig">Market rate ₹35,000+</div>
+        <div class="tier-price"><span class="cur">₹</span>18,000</div>
+        <div class="tier-unit">/ one-time setup · + ₹2,499/mo maintenance</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>Everything in Smart Bot</li>
+          <li>AI-powered contextual replies</li>
+          <li>CRM integration + bulk broadcasts</li>
+          <li>Analytics dashboard + multilingual</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- S·02 Photography -->
+  <div class="service-block">
+    <div class="svc-header">
+      <span class="svc-idx">S·02</span>
+      <span class="svc-name">AI Product Photography</span>
+    </div>
+    <div class="svc-tag">On Amazon, Flipkart, and Instagram — the product image makes or breaks the sale before anyone reads the description. AI photography gives Karma the visual standards of D2C brands spending ₹50,000+ on studios, at a fraction of the cost and in 48 hours.</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-lbl">Standard</div>
+        <div class="tier-orig">Studio equivalent ₹500+/product</div>
+        <div class="tier-price"><span class="cur">₹</span>150</div>
+        <div class="tier-unit">/ product · 3–4 day delivery</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>3 images per product</li>
+          <li>2 background styles, basic retouching</li>
+          <li>JPG delivery</li>
+        </ul>
+      </div>
+      <div class="tier rec">
+        <div class="rec-tag">Recommended</div>
+        <div class="tier-lbl">Professional</div>
+        <div class="tier-orig">Studio equivalent ₹1,200+/product</div>
+        <div class="tier-price"><span class="cur">₹</span>200</div>
+        <div class="tier-unit">/ product · 48-hour delivery</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>5–6 images per product</li>
+          <li class="hl">4 backgrounds — lifestyle, minimal, dark, hero</li>
+          <li>Premium retouching · JPG + PNG</li>
+          <li>Best for Instagram &amp; website</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-lbl">Cinematic Premium</div>
+        <div class="tier-orig">Studio equivalent ₹3,000+/product</div>
+        <div class="tier-price"><span class="cur">₹</span>350</div>
+        <div class="tier-unit">/ product · rush delivery available</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>8–10 images, full scene compositions</li>
+          <li>Lifestyle shots + hero images</li>
+          <li>Ideal for Amazon, Flipkart, D2C launch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- S·03 Videography -->
+  <div class="service-block">
+    <div class="svc-header">
+      <span class="svc-idx">S·03</span>
+      <span class="svc-name">AI Product Videography</span>
+    </div>
+    <div class="svc-tag">Video content on Instagram Reels converts 3× better than static posts. A 15-second cinematic clip of Karma honey — golden, slow, textured — stops a customer mid-scroll and builds instant premium perception that photos alone cannot achieve.</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-lbl">Basic Clip</div>
+        <div class="tier-orig">Agency rate ₹2,000+/product</div>
+        <div class="tier-price"><span class="cur">₹</span>499</div>
+        <div class="tier-unit">/ product · MP4 delivery</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>1 video, 10–15 sec</li>
+          <li>Simple rotation + background</li>
+          <li>Ready for Instagram &amp; WhatsApp status</li>
+        </ul>
+      </div>
+      <div class="tier rec">
+        <div class="rec-tag">Recommended</div>
+        <div class="tier-lbl">Cinematic Reel</div>
+        <div class="tier-orig">Agency rate ₹5,000+/product</div>
+        <div class="tier-price"><span class="cur">₹</span>999</div>
+        <div class="tier-unit">/ product · all format delivery</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>2 videos, 15–30 sec each</li>
+          <li class="hl">Cinematic transitions, music, text overlays</li>
+          <li>Multiple ratios — 9:16 + 1:1</li>
+          <li>Ideal for Reels &amp; paid ads</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-lbl">Brand Film Pack</div>
+        <div class="tier-orig">Agency rate ₹15,000+/product</div>
+        <div class="tier-price"><span class="cur">₹</span>2,499</div>
+        <div class="tier-unit">/ product · raw files included</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>4 videos — hero, story, ad, short</li>
+          <li>Full narrative arc + voiceover option</li>
+          <li>Best for launches &amp; campaigns</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- S·04 Social Media -->
+  <div class="service-block">
+    <div class="svc-header">
+      <span class="svc-idx">S·04</span>
+      <span class="svc-name">Social Media Management</span>
+    </div>
+    <div class="svc-tag">Consistency on Instagram is not optional — it's the algorithm. Brands that post daily with strategy grow 4× faster than those that post sporadically. We handle content calendar, captions, Reels, and hashtags so you focus entirely on your product.</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-lbl">Essential</div>
+        <div class="tier-orig">Agency rate ₹25,000+/mo</div>
+        <div class="tier-price"><span class="cur">₹</span>10,000</div>
+        <div class="tier-unit">/ month</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>2 posts/day + daily Stories</li>
+          <li>Content creation, captions, hashtags</li>
+          <li>Monthly performance report</li>
+        </ul>
+      </div>
+      <div class="tier rec">
+        <div class="rec-tag">Recommended</div>
+        <div class="tier-lbl">Growth</div>
+        <div class="tier-orig">Agency rate ₹40,000+/mo</div>
+        <div class="tier-price"><span class="cur">₹</span>15,000</div>
+        <div class="tier-unit">/ month</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>Everything in Essential</li>
+          <li class="hl">3 Reels/week — script, edit, post</li>
+          <li>Competitor analysis + engagement replies</li>
+          <li>Bi-weekly strategy call with our team</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-lbl">Full Management</div>
+        <div class="tier-orig">Agency rate ₹65,000+/mo</div>
+        <div class="tier-price"><span class="cur">₹</span>22,000</div>
+        <div class="tier-unit">/ month</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>Everything in Growth</li>
+          <li>Paid ads management up to ₹5k spend</li>
+          <li>Influencer outreach + story highlights design</li>
+          <li>Weekly call + priority support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- S·05 Email -->
+  <div class="service-block">
+    <div class="svc-header">
+      <span class="svc-idx">S·05</span>
+      <span class="svc-name">Email Outreach Campaign</span>
+    </div>
+    <div class="svc-tag">B2B buyers — retailers, organic stores, health chains — don't discover brands on Instagram. They respond to a direct, professional email with the right offer at the right time. We target them precisely so your wholesale pipeline grows alongside your consumer brand.</div>
+    <div class="tiers">
+      <div class="tier">
+        <div class="tier-lbl">Starter</div>
+        <div class="tier-orig">Agency rate ₹6,000+/mo</div>
+        <div class="tier-price"><span class="cur">₹</span>2,000</div>
+        <div class="tier-unit">/ month</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>200 targeted contacts/month</li>
+          <li>1 email template + basic tracking</li>
+          <li>Local retailers outreach</li>
+        </ul>
+      </div>
+      <div class="tier rec">
+        <div class="rec-tag">Recommended</div>
+        <div class="tier-lbl">Pro Campaign</div>
+        <div class="tier-orig">Agency rate ₹10,000+/mo</div>
+        <div class="tier-price"><span class="cur">₹</span>3,000</div>
+        <div class="tier-unit">/ month</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>500 contacts per month</li>
+          <li class="hl">3-email follow-up sequence + A/B testing</li>
+          <li>Detailed analytics + replies managed by us</li>
+          <li>Best for growing wholesale orders</li>
+        </ul>
+      </div>
+      <div class="tier">
+        <div class="tier-lbl">Scale Campaign</div>
+        <div class="tier-orig">Agency rate ₹18,000+/mo</div>
+        <div class="tier-price"><span class="cur">₹</span>5,500</div>
+        <div class="tier-unit">/ month</div>
+        <div class="tier-hr"></div>
+        <ul class="tier-list">
+          <li>1,500+ contacts/month</li>
+          <li>Full automation + CRM + LinkedIn outreach</li>
+          <li>Pan-India distributor targeting</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-div"></div>
+
+<!-- ══════════════════════════════════════
+     RECOMMENDED PACKAGE (dark)
+══════════════════════════════════════ -->
+<div class="section dark">
+  <div class="sec-eyebrow dark">02 · Recommended Combination</div>
+  <div class="sec-title dark">The Fastest Path<br>to Visible Growth</div>
+  <div class="sec-intro dark">Based on where Karma is today and what D2C natural brands need to break through in 90 days — this is the combination we recommend.</div>
+
+  <table class="pkg-table">
+    <thead>
+      <tr>
+        <th style="width:42%">Service</th>
+        <th style="width:26%">Tier</th>
+        <th style="width:32%; text-align:right;">Investment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="pkg-svc">WhatsApp AI Bot</div></td>
+        <td><span class="pkg-chip">Smart Bot</span></td>
+        <td><div class="pkg-price">₹9,999 <span class="unit">one-time</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="pkg-svc">AI Photography — 10 products</div></td>
+        <td><span class="pkg-chip">Professional</span></td>
+        <td><div class="pkg-price">₹2,000 <span class="unit">one-time</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="pkg-svc">AI Videography — 5 products</div></td>
+        <td><span class="pkg-chip">Cinematic Reel</span></td>
+        <td><div class="pkg-price">₹4,995 <span class="unit">one-time</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="pkg-svc">Social Media Management</div></td>
+        <td><span class="pkg-chip">Growth</span></td>
+        <td><div class="pkg-price">₹15,000 <span class="unit">/mo</span></div></td>
+      </tr>
+      <tr>
+        <td><div class="pkg-svc">Email Outreach Campaign</div></td>
+        <td><span class="pkg-chip">Pro Campaign</span></td>
+        <td><div class="pkg-price">₹3,000 <span class="unit">/mo</span></div></td>
+      </tr>
+      <tr class="pkg-total-row">
+        <td colspan="2">
+          <div class="pkg-total-lbl">Monthly Ongoing Investment</div>
+          <div class="pkg-total-note">+ ₹16,994 one-time setup (paid once)</div>
+        </td>
+        <td>
+          <div class="pkg-total-price"><span class="cur">₹</span>18,000<span class="mo">/mo</span></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="savings">
+    <div class="savings-lbl">You save vs standard agency market rates —</div>
+    <div class="savings-amt">₹80,000+ / month</div>
+  </div>
+
+  <div class="pkg-note">
+    One-time setup (₹16,994) is invested once and yours forever. Monthly ongoing is ₹18,000 — covering a complete digital growth system: photography, video, social media, WhatsApp automation, and B2B email outreach. All running together. All measured. All owned by you.
+  </div>
+</div>
+
+<div class="sec-div"></div>
+
+<!-- ══════════════════════════════════════
+     WEEK BY WEEK TIMELINE (dark)
+══════════════════════════════════════ -->
+<div class="section dark">
+  <div class="sec-eyebrow dark">03 · Your 90-Day Journey</div>
+  <div class="sec-title dark">What Happens<br>Week by Week</div>
+  <div class="sec-intro dark">No guesswork. No waiting. Here is exactly what we deliver and when — from day one to day ninety.</div>
+
+  <div class="timeline-wrap">
+    <div class="timeline-track">
+
+      <div class="tl-item">
+        <div class="tl-node">
+          <div class="tl-circle"></div>
+          <div class="tl-week">Week 1</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Foundation &amp; Onboarding</div>
+          <div class="tl-items">
+            <span class="tl-chip">Brand audit</span>
+            <span class="tl-chip">Product catalog review</span>
+            <span class="tl-chip">WhatsApp bot setup begins</span>
+            <span class="tl-chip gold">First deliverables in 5 days</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-node">
+          <div class="tl-circle"></div>
+          <div class="tl-week">Week 2</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Visuals Go Live</div>
+          <div class="tl-items">
+            <span class="tl-chip">AI photography — all 10 products delivered</span>
+            <span class="tl-chip">First 5 cinematic reels delivered</span>
+            <span class="tl-chip gold">WhatsApp bot activated</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-node">
+          <div class="tl-circle"></div>
+          <div class="tl-week">Week 3–4</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Content Engine Starts</div>
+          <div class="tl-items">
+            <span class="tl-chip">Social media daily posting begins</span>
+            <span class="tl-chip">3 Reels per week rolling out</span>
+            <span class="tl-chip">Email outreach — 500 contacts targeted</span>
+            <span class="tl-chip gold">First B2B inquiries expected</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-node">
+          <div class="tl-circle"></div>
+          <div class="tl-week">Week 5–6</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Momentum &amp; Optimisation</div>
+          <div class="tl-items">
+            <span class="tl-chip">Analytics review — what's working</span>
+            <span class="tl-chip">Email A/B test results in</span>
+            <span class="tl-chip">Content strategy refined from data</span>
+            <span class="tl-chip gold">Strategy call with you</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-node">
+          <div class="tl-circle"></div>
+          <div class="tl-week">Week 7–9</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">Growth Acceleration</div>
+          <div class="tl-items">
+            <span class="tl-chip">Follower growth compounding</span>
+            <span class="tl-chip">Bot capturing orders autonomously</span>
+            <span class="tl-chip">B2B pipeline building</span>
+            <span class="tl-chip gold">Competitor benchmarking report</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-node">
+          <div class="tl-circle"></div>
+          <div class="tl-week">Week 10–12</div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-title">90-Day Results Review</div>
+          <div class="tl-items">
+            <span class="tl-chip">Full performance report delivered</span>
+            <span class="tl-chip">ROI measurement vs targets</span>
+            <span class="tl-chip">Next 90-day strategy presented</span>
+            <span class="tl-chip gold">Scale decision — together</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="sec-div"></div>
+
+<!-- ══════════════════════════════════════
+     ROI
+══════════════════════════════════════ -->
+<div class="section tint">
+  <div class="sec-eyebrow light">04 · Expected Outcomes</div>
+  <div class="sec-title light">What the Numbers<br>Look Like at 90 Days</div>
+  <div class="sec-intro light">Conservative benchmarks from comparable natural product D2C brands in Tier-2 India markets, running a similar combination of services.</div>
+
+  <div class="roi-grid">
+    <div class="roi-card">
+      <div class="roi-scenario">WhatsApp Bot Impact</div>
+      <div class="roi-value">+35%</div>
+      <div class="roi-label">Increase in captured leads from WhatsApp inquiries — queries that would otherwise go unanswered now become live sales conversations.</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-scenario">Photography + Video Impact</div>
+      <div class="roi-value">2.4×</div>
+      <div class="roi-label">Average improvement in Instagram profile engagement when professional product visuals replace phone photography on comparable accounts.</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-scenario">Social Media Growth</div>
+      <div class="roi-value">3–5K</div>
+      <div class="roi-label">Realistic follower growth in first 90 days on a consistent Reels + posting strategy for a natural/organic brand with a genuine story.</div>
+    </div>
+    <div class="roi-card">
+      <div class="roi-scenario">B2B Email Outreach</div>
+      <div class="roi-value">8–15</div>
+      <div class="roi-label">Qualified wholesale inquiries expected per month from the Pro Campaign tier targeting retailers, health stores, and organic chains.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-div"></div>
+
+<!-- ══════════════════════════════════════
+     TERMS
+══════════════════════════════════════ -->
+<div class="section light">
+  <div class="sec-eyebrow light">05 · Terms of Partnership</div>
+  <div class="sec-title light">Clear. Simple.<br>No Surprises.</div>
+  <div class="sec-intro light">We believe a good partnership starts with absolute clarity on how we work together.</div>
+
+  <div class="terms-grid">
+    <div class="term-card">
+      <div class="term-lbl">Payment</div>
+      <div class="term-text"><strong>50% advance</strong> before work begins. Balance on the 1st of each month. UPI and Bank Transfer accepted.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-lbl">Start Date</div>
+      <div class="term-text">Work begins <strong>within 48 hours</strong> of payment confirmation. First deliverables in <strong>5 working days.</strong></div>
+    </div>
+    <div class="term-card">
+      <div class="term-lbl">Commitment</div>
+      <div class="term-text">A <strong>minimum 3-month engagement</strong> is recommended — digital systems need time to build momentum. Month-to-month available at +10%.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-lbl">Revisions</div>
+      <div class="term-text"><strong>2 free revisions</strong> per deliverable. Additional revisions at ₹199 each.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-lbl">Ownership</div>
+      <div class="term-text">Every asset — images, videos, copy, bot flows — is <strong>100% owned by Koriya Agro Producers Ltd</strong> upon final payment. No lock-in.</div>
+    </div>
+    <div class="term-card">
+      <div class="term-lbl">Validity</div>
+      <div class="term-text">This pricing is <strong>valid until 20 May 2025.</strong> Rates are subject to revision after expiry — confirm early to lock these in.</div>
+    </div>
+  </div>
+</div>
+
+<div class="sec-div"></div>
+
+<!-- ══════════════════════════════════════
+     CTA
+══════════════════════════════════════ -->
+<div class="cta-section">
+  <div class="cta-ring cta-ring-1"></div>
+  <div class="cta-ring cta-ring-2"></div>
+  <div class="cta-ring cta-ring-3"></div>
+  <div class="cta-glow"></div>
+
+  <div class="cta-eyebrow">Ready to Move Forward</div>
+
+  <div class="cta-headline">
+    <span class="cta-hl-1">LET'S BUILD SOMETHING</span>
+    <span class="cta-hl-2">worth talking about.</span>
+  </div>
+
+  <div class="cta-sub">Koi bhi service choose karein ya poora package — hum 24 ghante mein aapka custom plan ready karenge.</div>
+
+  <!--
+    ════════════════════════════════════════════
+    CLICKABLE PDF BUTTONS
+    Pure <a href="..."> — no JS onclick.
+    WhatsApp: wa.me with pre-filled message encoded.
+    Email: mailto with subject + body pre-filled.
+    Chrome → Print → Save as PDF preserves all href links.
+    ════════════════════════════════════════════
+  -->
+  <div class="cta-btns">
+    <a
+      href="https://wa.me/919630914500?text=Hi%20Zinway%2C%20I%27d%20like%20to%20discuss%20the%20Karma%20Brand%20package"
+      class="cta-btn btn-wa"
+    >
+      <span class="btn-icon">💬</span> WhatsApp Karein
+    </a>
+    <a
+      href="mailto:zinwayyy@gmail.com?subject=Re%3A%20Proposal%20%23ZW-KAL-2025-02%20%E2%80%94%20Karma%20Brand%20Package&body=Hi%20Zinway%2C%0A%0AI%27d%20like%20to%20discuss%20the%20Karma%20Brand%20package%20(Proposal%20%23ZW-KAL-2025-02).%0A%0APlease%20get%20in%20touch%20at%20your%20earliest.%0A%0ARegards%2C%0AKoriya%20Agro%20Producers%20Ltd"
+      class="cta-btn btn-email"
+    >
+      <span class="btn-icon">✉</span> Email Karein
+    </a>
+    <a href="tel:+919630914500" class="cta-btn btn-phone">
+      <span class="btn-icon">📞</span> Call Karein
+    </a>
+  </div>
+
+  <div class="cta-valid">
+    Quotation valid until &nbsp;<span class="hl">20 May 2025</span>&nbsp;
+    &nbsp;·&nbsp; Ref <span class="hl">#ZW-KAL-2025-02</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-brand">Zinway · zinwayyy@gmail.com · +91 96309 14500</div>
+  <div class="footer-meta">
+    Confidential · Quote #ZW-KAL-2025-02<br>
+    Valid till 20 May 2025
+  </div>
+</div>
+
+</div><!-- /page-wrap -->
+
+<!-- PDF FAB -->
+<div id="toast" class="toast">
+  <strong>⚠️ Open in Chrome to Save PDF</strong><br>
+  Copy the code, save as <code>.html</code>, open in <strong>Google Chrome</strong>, then press <strong>Ctrl+P → Save as PDF</strong>. All button links will be clickable in the PDF.
+</div>
+
+<button class="pdf-fab" onclick="savePDF()" title="Save as PDF">
+  <div class="fab-icon">⬇</div>
+  <div class="fab-text">
+    Save as PDF
+    <span>A4 · Vector · Print Ready</span>
+  </div>
+</button>
+
+<script>
+function savePDF() {
+  var orig = document.title;
+  document.title = 'Zinway_x_KoriyaAgro_GrowthProposal_ZW-KAL-2025-02';
+  try {
+    window.print();
+    setTimeout(function(){ document.title = orig; }, 1200);
+  } catch(e) {
+    document.title = orig;
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 7000);
+  }
+}
+document.addEventListener('keydown', function(e){
+  if ((e.ctrlKey||e.metaKey) && e.shiftKey && e.key==='S') {
+    e.preventDefault(); savePDF();
+  }
+});
+</script>
+</body>
+</html>
